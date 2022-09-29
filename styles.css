@@ -15,7 +15,7 @@ body {
     display: grid;
     grid-template-areas: 
     'display display display'
-    'val1 operador val2'
+    'val1 val1 operador '
     'btn btn btn'; 
     max-width: 60rem;
     margin: 20rem auto;
@@ -37,8 +37,8 @@ body {
 }
 
 input {
-    outline: solid 2px rgb(226, 219, 219);
-    border: transparent;
+    outline: none;
+    border: solid 2px rgb(226, 219, 219);
     padding: .5rem 1rem;
     text-align: end;
 }
@@ -56,19 +56,14 @@ input::-webkit-outer-spin-button {
 
 .operador {
     grid-area: operador;
-    /* grid-column: 3/5;
-    grid-row: 2; */
     width: 100%;
     height: 100%;
     pad: .5rem;
-    text-align: center;
+    justify-content: center;
     font-size: 1.6rem;
     font-weight: 700;
-}
-
-#val2 {
-    grid-area: val2;
-    width: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .btn {

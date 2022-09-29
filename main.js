@@ -1,6 +1,6 @@
 const $ = selector => document.querySelector(selector)
 const display = $('.display')
-const valor = document.querySelectorAll('.value')
+const valor = document.querySelector('.value')
 const operador = $('.operador')
 const suma = $('#sumar')
 const resta = $('#restar')
@@ -9,49 +9,47 @@ const div = $('#division')
 const result = $('#igual')
 const borrar = $('#borrar')
 
-suma.addEventListener('click',()=>{
-    operador.textContent='+'
-})
+let firstNumber
 
-resta.addEventListener('click',()=>{
-    operador.textContent='-'
-})
+suma.addEventListener('click',()=>elegirOperador(suma.textContent))
 
-mult.addEventListener('click',()=>{
-    operador.textContent='x'
-})
+resta.addEventListener('click',()=>elegirOperador(resta.textContent))
 
-div.addEventListener('click',()=>{
-    operador.textContent='/'
-})
+mult.addEventListener('click',()=>elegirOperador(mult.textContent))
 
-borrar.addEventListener('click',()=>{
-    operador.textContent=''
-    display.textContent = ''
-    for(let i=0; i<valor.length;i++){
-        valor[i].value = ''
-    }
-})
+div.addEventListener('click',()=>elegirOperador(div.textContent))
+
+borrar.addEventListener('click',limpiar)
 
 result.addEventListener('click', resultado)
+
+function elegirOperador(symbol){
+    operador.textContent= symbol
+    firstNumber = +valor.value
+    valor.value = ''
+}
+
+function limpiar(){
+    display.textContent = ''
+    valor.value = ''
+    operador.textContent = ''
+}
 
 function resultado() {
     switch(operador.textContent){
         case '+': 
-            display.innerText = +valor[0].value + +valor[1].value
+            display.innerText = firstNumber + +valor.value
             break;
         case '-': 
-            display.innerText = +valor[0].value - +valor[1].value
+            display.innerText = firstNumber - +valor.value
             break;
         case 'x': 
-            display.innerText = +valor[0].value * +valor[1].value
+            display.innerText = firstNumber * +valor.value
             break;
         case '/': 
-            display.innerText = +valor[0].value / +valor[1].value
+            display.innerText = firstNumber / +valor.value
             break;
     }
-    for(let i=0; i<valor.length;i++){
-        valor[i].value = ''
-    }
+    valor.value = ''
     operador.textContent=''
 }
