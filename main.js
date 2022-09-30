@@ -1,55 +1,28 @@
 const $ = selector => document.querySelector(selector)
 const display = $('.display')
-const valor = document.querySelector('.value')
-const operador = $('.operador')
-const suma = $('#sumar')
-const resta = $('#restar')
-const mult = $('#multiplicar')
-const div = $('#division')
-const result = $('#igual')
-const borrar = $('#borrar')
+const operador = document.querySelectorAll('.operador')
+const numeros = document.querySelectorAll('.number')
 
-let firstNumber
+window.addEventListener('keydown', sePresionoUnaTecla)
 
-suma.addEventListener('click',()=>elegirOperador(suma.textContent))
-
-resta.addEventListener('click',()=>elegirOperador(resta.textContent))
-
-mult.addEventListener('click',()=>elegirOperador(mult.textContent))
-
-div.addEventListener('click',()=>elegirOperador(div.textContent))
-
-borrar.addEventListener('click',limpiar)
-
-result.addEventListener('click', resultado)
-
-function elegirOperador(symbol){
-    operador.textContent= symbol
-    firstNumber = +valor.value
-    valor.value = ''
+function sePresionoUnaTecla(e){
+   console.log(e)
+   filtrarTecla(e.key)
 }
 
-function limpiar(){
-    display.textContent = ''
-    valor.value = ''
-    operador.textContent = ''
-}
+function filtrarTecla(tecla){
+    const teclasPosibles = ['1','2','3','4','5','6','7','8','9','0','.']
+    const operadoresPosibles = ['+','-','*','/','%']
 
-function resultado() {
-    switch(operador.textContent){
-        case '+': 
-            display.innerText = firstNumber + +valor.value
-            break;
-        case '-': 
-            display.innerText = firstNumber - +valor.value
-            break;
-        case 'x': 
-            display.innerText = firstNumber * +valor.value
-            break;
-        case '/': 
-            display.innerText = firstNumber / +valor.value
-            break;
+    if(operadoresPosibles.includes(tecla)) operadores(tecla)
+
+    if(teclasPosibles.includes(tecla)){
+        display.append(tecla)
     }
-    valor.value = ''
-    operador.textContent=''
+}
+
+function operadores(operador) {
+    switch(operador){
+        case '+':
+    }
 }
