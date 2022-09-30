@@ -1,8 +1,8 @@
 const $ = selector => document.querySelector(selector)
 const display = $('.display')
-const operador = document.querySelectorAll('.operador')
-const numeros = document.querySelectorAll('.number')
 const buttons = document.querySelectorAll('button')
+
+// Controled by buttons
 
 buttons.forEach(numero =>{
     numero.addEventListener('click',(e)=>{
@@ -32,55 +32,24 @@ function roundToTwo(num) {
     return +(Math.round(num + "e+2") + "e-2");
 }
 
+// Controled by keyboard
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* 
 window.addEventListener('keydown', sePresionoUnaTecla)
 
 function sePresionoUnaTecla(e){
-   console.log(e)
+   /* console.log(e) */
    filtrarTecla(e.key)
 }
 
 function filtrarTecla(tecla){
-    const teclasPosibles = ['1','2','3','4','5','6','7','8','9','0','.']
-    const operadoresPosibles = ['+','-','*','/','%']
+    const teclasPosibles = ['1','2','3','4','5','6','7','8','9','0','.','+','-','*','/','%']
 
-    if(operadoresPosibles.includes(tecla)) operadores(tecla)
-
-    if(teclasPosibles.includes(tecla)){
+    if(tecla=='Enter'){
+        display.innerText=roundToTwo(eval(display.innerText))
+    }else if(tecla == 'Backspace'){
+        const arr= [...display.innerText]
+        display.innerText = (arr.slice(0,arr.length-1)).join('') 
+    } else if(teclasPosibles.includes(tecla)){
         display.append(tecla)
     }
 }
-
-function operadores(operador) {
-    switch(operador){
-        case '+':
-    }
-} */
