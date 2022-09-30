@@ -13,107 +13,63 @@ body {
 
 .container {
     display: grid;
-    grid-template-areas: 
-    'display display display'
-    'val1 operador val2'
-    'btn btn btn'; 
-    max-width: 60rem;
-    margin: 20rem auto;
+    grid-template-columns: 100% ;
+    grid-template-rows: 10rem 20rem;
+    max-width: 40rem;
+    min-width: 10rem;
+    margin: 10rem auto;
     border: 1px black solid;
-    padding: 3rem;
-    gap: 1rem;
 }
 
 .display {
-    grid-area: display;
-    height: 7rem;
-    width: 100%;
-    font-size: 2rem;
+    height: 100%;
+    font-size: 1.6rem;
     display: flex;
     align-items: end;
     justify-content: flex-end;
-    border: solid 2px rgb(226, 219, 219);
     padding: .5rem 1rem;
 }
 
-input {
-    outline: solid 2px rgb(226, 219, 219);
-    border: transparent;
-    padding: .5rem 1rem;
-    text-align: end;
-}
-
-input::-webkit-inner-spin-button,
-input::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-#val1 {
-    grid-area: val1;
+.teclado {
+    margin: 1rem auto 0;
+    display: flex;
     width: 100%;
+    flex-direction: column-reverse;
+    justify-content: center;
 }
 
-.operador {
-    grid-area: operador;
-    /* grid-column: 3/5;
-    grid-row: 2; */
+.teclado div {
+    display: flex;
+    height: 100%;
+}
+
+.teclado .fila1{
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+}
+.btn button {
     width: 100%;
     height: 100%;
-    pad: .5rem;
-    text-align: center;
-    font-size: 1.6rem;
-    font-weight: 700;
-}
-
-#val2 {
-    grid-area: val2;
-    width: 100%;
-}
-
-.btn {
-    grid-area: btn;
-    display: grid;
-    width: 100%;
-    grid-template-areas: 
-    'group1 group2';
-    place-items: center; 
-}
-
-.btn-group1 {
-    grid-area: group1;
-}
-
-.btn-group2 {
-    grid-area: group2;
-}
-
-.btn button {
-    width: 5rem;
     border: transparent;
-    background-color: rgb(226, 219, 219);
+    background-color: rgb(226, 219, 219); 
+    font-size: 1.2rem;
+}
+.btn .operador {
+    color: rgb(218, 82, 28);
+    font-weight: bold;
+}
+.btn .igual{
+    background-color: rgb(218, 82, 28);
+    color: white;
+}
+.btn .igual:hover {
+    background-color: rgb(218, 113, 72)
 }
 
-.btn button:hover {
+.btn button:active {
     background-color: #e9e9e9;
     box-shadow: 0 0 2px black;
 }
-
-@media  screen and (max-width: 32rem){
-    .container {
-        grid-template-areas: 
-        'display'
-        'val1'
-        'operador'
-        'val2'
-        'btn';
-    }
-
-    .btn {
-        grid-template-areas: 
-        'group1'
-        'group2';
-        text-align: center;
-        gap: 1rem;
-    }
+.btn button:hover {
+    background-color: #e9e9e9;
 }

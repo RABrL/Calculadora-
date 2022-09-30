@@ -1,57 +1,55 @@
 const $ = selector => document.querySelector(selector)
 const display = $('.display')
-const valor = document.querySelectorAll('.value')
-const operador = $('.operador')
-const suma = $('#sumar')
-const resta = $('#restar')
-const mult = $('#multiplicar')
-const div = $('#division')
-const result = $('#igual')
-const borrar = $('#borrar')
+const buttons = document.querySelectorAll('button')
 
-suma.addEventListener('click',()=>{
-    operador.textContent='+'
+// Controled by buttons
+
+buttons.forEach(numero =>{
+    numero.addEventListener('click',(e)=>{
+        /* const operations = {
+            '/': (a,b)=> a/b,
+            'x': (a,b)=> a*b,
+            '+': (a,b)=> a+b,
+            '-': (a,b)=> a-b,
+            '%': (a)=> a/100
+        }
+        console.log(operations[e.target.innerText](1,2)) */
+        const key = e.target.innerText
+        if(key=='='){
+            display.innerText=roundToTwo(eval(display.innerText))
+        }else if(key == 'x') {
+            display.append('*')
+        }else if(key == 'DEL'){
+            const arr= [...display.innerText] // convierto el contenido del display en un array de caracteres
+            display.innerText = (arr.slice(0,arr.length-1)).join('') // Corto/extraigo todo el array excepto el ultimo caracter y lo convierto en string denuevo
+        }else if(key == 'AC'){
+            display.innerText = ''
+        }else display.append(key)
+    })
 })
 
-resta.addEventListener('click',()=>{
-    operador.textContent='-'
-})
+function roundToTwo(num) {
+    return +(Math.round(num + "e+2") + "e-2");
+}
 
-mult.addEventListener('click',()=>{
-    operador.textContent='x'
-})
+// Controled by keyboard
 
-div.addEventListener('click',()=>{
-    operador.textContent='/'
-})
+window.addEventListener('keydown', sePresionoUnaTecla)
 
-borrar.addEventListener('click',()=>{
-    operador.textContent=''
-    display.textContent = ''
-    for(let i=0; i<valor.length;i++){
-        valor[i].value = ''
+function sePresionoUnaTecla(e){
+   /* console.log(e) */
+   filtrarTecla(e.key)
+}
+
+function filtrarTecla(tecla){
+    const teclasPosibles = ['1','2','3','4','5','6','7','8','9','0','.','+','-','*','/','%']
+
+    if(tecla=='Enter'){
+        display.innerText=roundToTwo(eval(display.innerText))
+    }else if(tecla == 'Backspace'){
+        const arr= [...display.innerText]
+        display.innerText = (arr.slice(0,arr.length-1)).join('') 
+    } else if(teclasPosibles.includes(tecla)){
+        display.append(tecla)
     }
-})
-
-result.addEventListener('click', resultado)
-
-function resultado() {
-    switch(operador.textContent){
-        case '+': 
-            display.innerText = +valor[0].value + +valor[1].value
-            break;
-        case '-': 
-            display.innerText = +valor[0].value - +valor[1].value
-            break;
-        case 'x': 
-            display.innerText = +valor[0].value * +valor[1].value
-            break;
-        case '/': 
-            display.innerText = +valor[0].value / +valor[1].value
-            break;
-    }
-    for(let i=0; i<valor.length;i++){
-        valor[i].value = ''
-    }
-    operador.textContent=''
 }
